@@ -1,0 +1,327 @@
+.header {
+  height: 55px;
+  position: fixed;
+  right: 0;
+  left: 265px;
+  max-width: 100% !important;
+  width: auto !important;
+  transition: all 0.3s;
+  z-index: 9;
+
+  &.over-mode {
+    left: 64px;
+  }
+
+  .header-menu {
+    background: #1e1e2d;
+
+    &_link {
+      padding: 8px 14px;
+      border-radius: 4px;
+      color: #c0c4d1;
+      font-weight: 500;
+      transition: all 0.3s;
+
+      &:hover {
+        color: $color-primary;
+        background: #282f48;
+      }
+
+      &-active {
+        color: white;
+        background: #282f48;
+        &:hover {
+          color: white;
+        }
+      }
+
+      &--hover-active {
+        color: $color-primary;
+      }
+    }
+
+    &_dropdown {
+      &:hover {
+        .header-menu_link {
+          &:first-child {
+            color: $color-primary;
+            background: #282f48;
+          }
+        }
+        & > .menu_link {
+          color: #fff;
+          background: #1b1b28;
+
+          &::after,
+          i {
+            color: $color-primary;
+          }
+        }
+      }
+
+      &--show {
+        background: #1e1e2d;
+        border: none;
+        width: 275px;
+        animation: position-absolute-fade-up 0.3s ease forwards;
+      }
+
+      .right-top {
+        &:hover {
+          > .header-menu_dropdown-link {
+            color: #fff;
+            background: #1b1b28;
+            &::after {
+              color: $color-primary;
+            }
+          }
+        }
+      }
+    }
+
+    &_icon {
+      border-radius: 4px;
+      color: #434d6b;
+      font-weight: 500;
+      font-size: 16px;
+      transition: all 0.3s;
+      width: 44px;
+      height: 44px;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .icon {
+        vertical-align: middle;
+        margin: 0;
+      }
+
+      &:hover,
+      &-active {
+        color: #fff;
+        text-decoration: none;
+        background: #282f48;
+      }
+    }
+
+    &_item {
+      .dropdown_bg-white {
+        background: #fff;
+        margin-top: 10px;
+        box-shadow: 0 0 50px 0 rgba(82, 63, 105, 0.15);
+
+        .quick-search {
+          i {
+            font-size: 16px;
+            color: #74788d;
+          }
+          &_input {
+            border: none;
+            outline: none;
+            width: 100%;
+            height: 38px;
+          }
+        }
+      }
+
+      .search-dropdown {
+        width: 320px;
+        padding: 13px 20px;
+      }
+
+      .user-dropdown {
+        width: 370px;
+        border-top-left-radius: none;
+        border-top-right-radius: none;
+        padding: 0 !important;
+      }
+
+      .user {
+        &-notification {
+          padding: 26px 20px;
+          background-image: url("https://keenthemes.com/metronic/preview/angular/demo1/assets/media/misc/bg-1.jpg");
+          overflow: hidden;
+          cursor: default;
+        }
+
+        &-avatar {
+          img {
+            width: 60px;
+            height: 60px;
+            border-radius: 4px;
+          }
+        }
+
+        &-name {
+          font-size: 1.3rem;
+          font-weight: 500;
+          color: #fff;
+        }
+
+        &-badge {
+          line-height: 1;
+          cursor: pointer;
+
+          span {
+            font-weight: 500;
+          }
+        }
+
+        &-card {
+          &_item {
+            padding: 15px 20px;
+            display: block;
+            cursor: pointer;
+
+            &-title {
+              color: #595d6e;
+              font-weight: 500;
+              line-height: 1.5;
+            }
+
+            &-decs {
+              color: #74788d;
+              line-height: 1.5;
+            }
+          }
+        }
+
+        &-custom {
+          padding: 20px;
+        }
+      }
+
+      .header-menu_icon {
+        &::after {
+          display: none;
+        }
+      }
+    }
+
+    &_user {
+      font-weight: 500;
+      height: 44px;
+      border-radius: 4px;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      padding: 0 8px;
+      cursor: pointer;
+
+      .welcome {
+        color: #6b7594;
+      }
+
+      .username {
+        color: #c0c4d1;
+        font-weight: bold;
+      }
+
+      img {
+        width: 34px;
+        height: 34px;
+        border-radius: 3px;
+      }
+
+      &::after {
+        display: none;
+      }
+
+      &:hover {
+        background: #282f48;
+        .username {
+          color: #fff;
+        }
+      }
+
+      &-active {
+        background: #282f48;
+        .username {
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  .subheader {
+    background: #fff;
+    height: 54px;
+
+    &_title {
+      color: #434349;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 1.3;
+      border-right: 1px solid #e7e8ef;
+      padding-right: 13px;
+      cursor: default;
+    }
+
+    &_desc {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #959cb6;
+      margin: 0 13px;
+      cursor: default;
+    }
+  }
+
+  .left-1px {
+    left: 1px !important;
+    &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 1px;
+      height: 100%;
+      background: transparent;
+      top: 0;
+      right: 100%;
+    }
+  }
+
+  .dropdown-language {
+    .nc-select {
+      border: 1px solid $color-icon-gray;
+      color: #c0c4d1;
+      border-radius: 4px;
+      min-width: 125px;
+
+      &::after {
+        border-bottom-color: $color-icon-gray;
+        border-right-color: $color-icon-gray;
+      }
+
+      &.open, &:hover {
+        background: #282f48;
+        color: #fff;
+
+        &::after {
+          border-bottom-color:#fff;
+          border-right-color:#fff;
+        }
+      }
+
+      .list {
+        margin-top: 10px !important;
+        border-radius: 3px;
+        box-shadow: 0 0 50px 0 rgba(82, 63, 105, 0.15);
+        color: #000;
+
+        .option {
+          &.selected {
+            background: #fff;
+            color: $color-primary;
+          }
+        }
+      }
+    }
+  }
+}
+
+.mat-toolbar-row {
+  height: 55px !important;
+}
+.mat-toolbar-multiple-rows {
+  min-height: 55px !important;
+}

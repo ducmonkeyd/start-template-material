@@ -1,0 +1,56 @@
+<nav class="side-navbar box-scroll sidebar-scroll" [ngClass]="{ shrinked: !isToggleNav }" tabindex="1"
+  style="outline: none;">
+  <div class="nav-brand d-flex align-items-center justify-content-between">
+    <div class="nav-logo" *ngIf="isToggleNav">
+      <a class="logo" routerLink="">dashboard</a>
+    </div>
+    <div class="nav-tool">
+      <mat-icon class="icon" *ngIf="isToggleNav" (click)="emitOverMode(true)">
+        keyboard_arrow_left
+      </mat-icon>
+      <mat-icon class="icon icon-toggle" *ngIf="!isToggleNav" (click)="emitOverMode(false)">
+        keyboard_arrow_right
+      </mat-icon>
+    </div>
+  </div>
+  <div class="nav-wrapper" (mouseover)="isToggleNav = true" (mouseleave)="isOverMode && isToggleNav = false">
+    <div class="nav-items">
+      <ng-template *ngIf="navModels && navModels.items" ngFor let-item [ngForOf]="navModels.items" let-index="index">
+        <!-- <span *ngIf="item.type == 'nav-category' && onCheckPermision(item.allowRoles)" class="heading" [innerHTML]="i18nService.getTransByKey(item.translateKey)"></span> -->
+        <ul class="list-unstyled" [ngClass]="{'has-child': item.children && item.children.length > 0}">
+          <li>
+            <a *ngIf="item.children && item.children.length > 0"
+              href="javascript:;" class="parent menu_link hover-nav-item"
+              [ngClass]="{'collapsed': collapsed === index, 'toggle': !isToggleNav, 'active': item.isActive}"
+              (click)="onCollapsed(index)">
+              <i class="menu-icon {{ item.icon }}"></i>
+              <span *ngIf="isToggleNav">{{item.translateKey | translate}}</span>
+            </a>
+            <a *ngIf="item.children && item.children.length <= 0 && !!item.url" routerLink="/{{ item.url }}"
+              [ngClass]="{'active': item.isActive}" class="parent menu_link"
+              (click)="onCollapsed(index)">
+              <i class="menu-icon {{ item.icon }}"></i>
+              <span *ngIf="isToggleNav">{{item.translateKey | translate}}</span>
+            </a>
+            <a *ngIf="item.children && item.children.length <= 0 && item.url == ''" [routerLink]="['']"
+              [ngClass]="{'active': item.isActive}" class="parent menu_link"
+              (click)="onCollapsed(index)">
+              <i class="menu-icon {{ item.icon }}"></i>
+              <span *ngIf="isToggleNav">{{item.translateKey | translate}}</span>
+            </a>
+            <ul *ngIf="item.children && item.children.length > 0 && isToggleNav"
+              class="list-unstyled pt-0 list-collapsed" [@smoothCollapse]="!(collapsed === index) ? 'initial' : 'final'"
+              [ngClass]="{ show: item.isActive }">
+              <li *ngFor="let childItem of item.children">
+                <a class="menu_link" routerLink="/{{ childItem.url }}" [ngClass]="{ 'active': childItem.isActive }">
+                  <i class="fa fa-circle dot" aria-hidden="true"></i>
+                  <span>{{childItem.translateKey | translate}}</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </ng-template>
+    </div>
+  </div>
+</nav>

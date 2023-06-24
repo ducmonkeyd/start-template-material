@@ -1,0 +1,70 @@
+<div class="login row no-gutters">
+  <div class="login-welcome col-lg-8 col-md-6 col-sm-4 d-flex flex-column">
+    
+  </div>
+  <div class="login-wrapper col-lg-4 col-md-6 col-sm-8 d-flex flex-column">
+    <div class="login-head text-right">
+      <a class="link" >{{'Commons.Button.SignUp' | translate}}</a>
+    </div>
+    <div class="change-languages change-languages-login">
+      <div aria-labelledby="language-dropdown">
+        <dropdown class="dropdown-language" [data]="languages" (onSelectedChange)="setLanguage($event)"> </dropdown>
+      </div>
+    </div>
+    <div class="login-body flex-grow-1 d-flex justify-content-center align-items-center">
+      <div class="login-form">
+        <div class="login-form_title text-center">
+          <h3>{{'Components.Login.LoginTitle' | translate}}</h3>
+        </div>
+        <div class="login-info">
+          <div *ngIf="errorMessage" class="alert alert-danger">
+            {{errorMessage}}
+          </div>
+        </div>
+        <form class="form" [formGroup]="loginForm" (submit)="login(loginForm.value)">
+          <mat-form-field class="form-field">
+            <input matInput type="email" placeholder="{{'Commons.Texts.Email' | translate}}" formControlName="email">
+            <mat-error *ngIf="loginForm.controls.email.hasError('email')"  [innerHTML]="'Commons.Error.ErrFormatEmail' | translate">
+            </mat-error>
+            <mat-error *ngIf="loginForm.controls.email.hasError('required')" [innerHTML]="'Commons.Error.ErrRequired' | translate">
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="form-field">
+            <input matInput type="password" placeholder="{{'Commons.Texts.Password' | translate}}" formControlName="password">
+            <mat-error *ngIf="loginForm.controls.password.hasError('required')" [innerHTML]="'Commons.Error.ErrRequired' | translate">
+            </mat-error>
+          </mat-form-field>
+          <div class="form-action d-flex justify-content-between align-items-center">
+            <a routerLink="/" class="link form-link_forgot">Forgot Passord</a>
+            <button type="submit" class="btn btn-primary form-btn_login d-flex align-items-center">
+              {{'Commons.Button.SignIn' | translate}} &nbsp;
+              <mat-spinner *ngIf="isLoading"></mat-spinner>
+            </button>
+          </div>
+        </form>
+        <div class="login-divider d-flex align-items-center">
+          <span class="flex-grow-1"></span>
+          <span></span>
+          <span class="flex-grow-1"></span>
+        </div>
+        <div class="login-option d-flex">
+          <a routerLink="/" class="btn btn-primary flex-grow-1">
+            <i class="fa fa-facebook"></i>
+            Facebook
+          </a>
+          <a routerLink="/" class="btn btn-info flex-grow-1 mx-4">
+            <i class="fa fa-twitter"></i>
+            Twitter
+          </a>
+          <a routerLink="/" class="btn btn-danger flex-grow-1">
+            <i class="fa fa-google"></i>
+            Google
+          </a>
+        </div>
+      </div>
+      <div [hidden]="!clientState.isBusy" class="inside-block">
+        <loading-state></loading-state>
+      </div>
+    </div>
+  </div>
+</div>

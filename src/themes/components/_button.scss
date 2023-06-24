@@ -1,0 +1,40 @@
+.btn {
+  font-weight: 500;
+  &.btn{
+    @each $name, $color in $theme {
+      &-#{$name} {
+        color: #fff;
+        border: none;
+        background: $color;
+        box-shadow: none;
+
+        &:hover {
+          background: darken($color: $color, $amount: 5);
+        }
+      }
+
+      &-label-#{$name} {
+        color: $color;
+        background: lighten($color: $color, $amount: 35);
+        box-shadow: none;
+
+        &:hover {
+          color: #fff;
+          background: $color;
+        }
+      }
+
+      &-outline-#{$name} {
+        color: $color;
+        background: #fff;
+        border-color: $color;
+        box-shadow: none;
+
+        &:hover {
+          color: #fff;
+          background: $color;
+        }
+      }
+    }
+  }
+}

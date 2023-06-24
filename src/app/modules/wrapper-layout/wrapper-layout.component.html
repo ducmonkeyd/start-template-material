@@ -1,0 +1,12 @@
+<mat-sidenav-container class="dashboard-containter">
+  <mat-sidenav class="sidenav" [ngClass]="{'over-mode': isOverMode}" mode="side" opened fixedInViewport="true">
+    <app-sidebar (overMode)="onOverMode($event)" [isOverMode]="isOverMode"></app-sidebar>
+  </mat-sidenav>
+  <mat-sidenav-content class="dashboard-content"  [style.margin-left.px]="isOverMode ? '64' : '265'">
+    <app-header [isOverMode]="isOverMode"></app-header>
+    <div class="dashboard-content-wrapper">
+      <router-outlet></router-outlet>
+    </div>
+    <app-footer></app-footer>
+  </mat-sidenav-content>
+</mat-sidenav-container>

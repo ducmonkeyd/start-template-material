@@ -1,0 +1,131 @@
+<mat-toolbar class="header" [ngClass]="{'over-mode': isOverMode}">
+  <mat-toolbar-row class="header-menu justify-content-between align-items-center">
+    <div class="d-flex header-menu--left">
+      <ng-template *ngIf="menuModel && menuModel.items" ngFor let-item [ngForOf]="menuModel.items">
+        <div class="header-menu_item px-1">
+          <div ngbDropdown class="header-menu_dropdown" placement="bottom-left"
+            *ngIf="item.children && item.children.length > 0 ; else singleItem">
+            <a href="javascript:;" class="header-menu_link" ngbDropdownToggle>
+              {{item.translateKey | translate}}
+            </a>
+            <div class="header-menu_dropdown--show p-0" ngbDropdownMenu>
+              <div *ngFor="let child of item.children">
+                <div class="header-menu_dropdown right-top" ngbDropdown placement="right-top" #droprright="ngbDropdown"
+                  (mouseover)="droprright.open()" (mouseleave)="droprright.close()"
+                  *ngIf="child.children && child.children.length > 0 ; else singleChildItem">
+                  <a href="javascript:;" class="menu_link" ngbDropdownToggle [ngClass]="{'active': child.isActive}">
+                    {{child.translateKey | translate}}
+                  </a>
+                  <div class="header-menu_dropdown--show left-1px" ngbDro pdownMenu>
+                    <a href="javascript:;" class="menu_link" *ngFor="let subChild of child.children"
+                      [ngClass]="{'active': subChild.isActive}">
+                      <i class="fa fa-circle dot" aria-hidden="true"></i>
+                      {{subChild.translateKey | translate}}
+                    </a>
+                  </div>
+                </div>
+                <ng-template #singleChildItem>
+                  <a routerLink="/{{child.url}}" class="menu_link" [ngClass]="{'active': child.isActive}">
+                    <i class="fa fa-circle dot" aria-hidden="true"></i>
+                    {{child.translateKey | translate}}
+                  </a>
+                </ng-template>
+              </div>
+            </div>
+          </div>
+          <ng-template #singleItem>
+            <a class="header-menu_link" routerLink="/{{item.url}}">
+              {{item.translateKey | translate}}
+            </a>
+          </ng-template>
+        </div>
+      </ng-template>
+    </div>
+    <div class="d-flex header-menu--right align-items-center">
+      <div class="header-menu_item px-1">
+        <div ngbDropdown class="header-menu_dropdown" placement="bottom-right" #search="ngbDropdown">
+          <span class="header-menu_icon" title="Search" ngbDropdownToggle
+            [ngClass]="search.isOpen() ? 'header-menu_icon-active' : ''">
+            <i class="fa fa-search icon" aria-hidden="true"></i>
+          </span>
+          <div class="header-menu_dropdown--show dropdown_bg-white search-dropdown px-4" ngbDropdownMenu>
+            <div class="quick-search d-flex align-items-center">
+              <i class="fa fa-search icon mr-3" aria-hidden="true"></i>
+              <input class="quick-search_input" placeholder="Search..." />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="header-menu_item mx-1">
+        <div aria-labelledby="language-dropdown">
+          <dropdown class="dropdown-language" [data]="languages" (onSelectedChange)="setLanguage($event)"> </dropdown>
+        </div>
+      </div>
+      <div class="header-menu_item">
+        <div ngbDropdown class="header-menu_dropdown" placement="bottom-right" #user="ngbDropdown">
+          <div class="header-menu_user" ngbDropdownToggle [ngClass]="user.isOpen() ? 'header-menu_user-active' : ''">
+            <span class="welcome pr-2">Hi,</span>
+            <span class="username pr-2">Sean</span>
+            <img src="assets/images/user-avatar.jpg">
+          </div>
+          <div class="header-menu_dropdown--show dropdown_bg-white user-dropdown px-4" ngbDropdownMenu>
+            <div class="user-notification d-flex align-items-center">
+              <div class="user-avatar">
+                <img src="assets/images/user-avatar.jpg">
+              </div>
+              <div class="user-name ml-3"> Sean </div>
+              <div class="user-badge ml-auto">
+                <span class="btn btn-success">23 messages</span>
+              </div>
+            </div>
+            <div class="user-card">
+              <a class="user-card_item">
+                <div class="user-card_item-detail">
+                  <div class="user-card_item-title">
+                    My Profile
+                  </div>
+                  <div class="user-card_item-decs">
+                    Account settings and more
+                  </div>
+                </div>
+              </a>
+              <a class="user-card_item">
+                <div class="user-card_item-detail">
+                  <div class="user-card_item-title">
+                    My Messages
+                  </div>
+                  <div class="user-card_item-decs">
+                    Inbox and tasks
+                  </div>
+                </div>
+              </a>
+              <a class="user-card_item">
+                <div class="user-card_item-detail">
+                  <div class="user-card_item-title">
+                    My Activities
+                  </div>
+                  <div class="user-card_item-decs">
+                    Log and notifications
+                  </div>
+                </div>
+              </a>
+              <a class="user-card_item">
+                <div class="user-card_item-detail">
+                  <div class="user-card_item-title">
+                    My Tasks
+                  </div>
+                  <div class="user-card_item-decs">
+                    lasted tasks and projects
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="user-custom">
+              <span (click)="logout()" class="btn btn-outline-primary">SIGN OUT</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>

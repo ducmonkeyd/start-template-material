@@ -1,0 +1,40 @@
+* {
+  font-family: "Poppins", Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+a {
+  &:hover {
+    text-decoration: none;
+    color: #fff;
+  }
+}
+
+div {
+  line-height: 1.5;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+button {
+  outline: none !important;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-thumb {
+  background: $color-icon-gray;
+  border-radius: 3px;
+}

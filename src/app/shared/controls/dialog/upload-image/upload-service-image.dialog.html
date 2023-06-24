@@ -1,0 +1,58 @@
+<div class="dialog-container">
+  <div class="dialog-wrapper">
+    <form (ngSubmit)="onUploadAttachment(f)" #f="ngForm">
+      <div class="dialog-header">
+        <h4 translate>Commons.Image.Upload</h4>
+      </div>
+      <div class="dialog-body">
+        <div class="image-container py-3">
+          <img
+            [src]="imageModel.data || 'assets/images/file-thumbnail.svg'"
+            alt="avatar"
+            class="file-content d-block mx-auto w-100"
+          />
+          <label
+            *ngIf="!imageModel.data"
+            mat-raised-button
+            for="upload-avatar"
+            class="btn-upload d-block mt-1x text-center"
+            style="cursor: pointer;"
+            ><mat-icon>add_photo_alternate</mat-icon>
+            <span translate>Commons.Image.ChooseImage</span>
+          </label>
+          <label
+            *ngIf="!!imageModel.data"
+            mat-raised-button
+            for="upload-avatar"
+            class="btn-upload d-block mt-1x text-center"
+            style="cursor: pointer;"
+            ><i class="fas fa-pencil-alt"></i> <span translate>Commons.Image.ChangeImage</span></label
+          >
+          <input
+            class="input-avatar"
+            type="file"
+            name="avatar"
+            accept="image/*"
+            id="upload-avatar"
+            (change)="onFileChange($event)"
+            accept="image/*"
+            required
+            style="pointer-events: none; opacity: 0;"
+          />
+          <div *ngIf="!!imageValidationMsg" class="error error-image">
+            <span [innerHtml]="imageValidationMsg"></span>
+          </div>
+        </div>
+      </div>
+      <div class="em-separator separator-dashed"></div>
+      <div class="dialog-footer text-right">
+        <button mat-raised-button type="submit" class="btn btn-info">
+          <span translate>Commons.Button.Upload</span>
+        </button>
+        <button mat-raised-button type="button" (click)="onCancel()">
+          <span translate>Commons.Button.Cancel</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+.fetch-selected-dialog {
+  .item {
+
+    &_dot {
+      display: inline-block;
+      font-size: 8px;
+      color: $gray;
+
+      &.active {
+        color: $color-success;
+      }
+
+      &.suspended {
+        color: $color-danger;
+      }
+    }
+
+    &_badge {
+      display: inline-block;
+      background: $gray;
+      color: #fff;
+      padding: 0 7px;
+      border-radius: 10px;
+
+      &.active {
+        background: $color-success;
+      }
+
+      &.suspended {
+        background: $color-danger;
+      }
+    }
+  }
+
+  .actions {
+    margin-left: auto;
+  }
+}
